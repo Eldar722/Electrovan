@@ -1,6 +1,6 @@
 function Hero () {
     return(
-        <section>
+        <section className="section-hero">
             <div className="container hero-content">
                 <div className="main-text-container">
                     <h1 className="main-text-hero text-display-xl">

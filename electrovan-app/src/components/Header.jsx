@@ -3,7 +3,7 @@ function Header () {
         <header>
             <div className="container">
                 <div className="header">
-                    <span className="logo text-heading-lg">ElectroVan</span>
+                    <span className="logo text-heading-xl">ElectroVan</span>
                     <nav className="nav">
                         <a href="" className="nav-link text-body-sm">Направления</a>
                         <a href="" className="nav-link text-body-sm">Каталог</a>
