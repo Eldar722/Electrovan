@@ -5,13 +5,20 @@ import tengeIcon from '../assets/images/icons/tengeDark-icon.svg';
 
 function CatalogModal({ onClose }) {
 
+    const [isClosing, setIsClosing] = useState(false);
+
+    const handleClose = () => {
+        setIsClosing(true);
+        setTimeout(onClose, 300);
+    };
+
     return (
-        <section className="modal-section">
+        <section className={`modal-section${isClosing ? ' modal-section--closing' : ''}`} onClick={handleClose}>
             <div className="container">
-                <button className='model-close' onClick={onClose}>
+                <button className='modal-close' onClick={handleClose}>
                     <img src={crossIcon} alt='cross-icon' />
                 </button>
-                <div className="modalcat-back">
+                <div className="modalcat-back" onClick={(e) => e.stopPropagation()}>
                     <img src={farizonImg} alt='farizon-car' />
                     <div className='modal-info'>
                         <div className='modal-title text-heading-xl'>
@@ -58,7 +65,7 @@ function CatalogModal({ onClose }) {
                             <button className='guarantees-button text-caption'>
                                 Условия гарантии
                             </button>
-                            <div className='model-line'></div>
+                            <div className='modal-line'></div>
                             <div className='modal-price'>
                                 <div className='modal-cost text-body-md'>
                                     Стоимость: ~16.921.855

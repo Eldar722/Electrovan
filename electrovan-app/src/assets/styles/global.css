@@ -3,7 +3,7 @@
 @import "./typography.css";
 
 section {
-    padding: 90px 0 16px;
+    padding: 64px 0 16px;
 }
 
 body {
@@ -67,19 +67,41 @@ body {
 /* Header */
 
 .header {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 1280px;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 32px;
-    width: 100%;
     padding: 24px 32px;
     border: solid 1px rgb(var(--blue-200-rgb));
     border-radius: 100px;
     background-color: rgba(var(--white-bg-rgb), 0.15);
     backdrop-filter: blur(2px);
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Хедер на белом фоне — frosted glass */
+.header--scrolled {
+    background-color: rgba(var(--white-bg-rgb), 0.75);
+    border-color: rgba(var(--blue-100-rgb), 0.4);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Тёмный текст в хедере на светлом фоне */
+.header--scrolled .logo,
+.header--scrolled .nav {
+    color: rgb(var(--blue-300-rgb));
+}
+
+.header--scrolled .nav a:hover {
+    color: rgb(var(--blue-200-rgb));
 }
 
 .logo {
@@ -95,9 +117,29 @@ body {
     color: rgb(var(--white-base-rgb));
 }
 
+.nav a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    background-color: rgb(var(--blue-200-rgb));
+    transition: width 0.3s ease;
+}
+
 .nav a:hover {
-    color: rgb(var(--blue-300-rgb));
-    transition: ease-in-out 0.3s;
+    color: rgb(var(--blue-100-rgb));
+}
+
+.nav a:hover::after {
+    width: 100%;
 }
 
 .cta-btn {
@@ -111,13 +153,20 @@ body {
     line-height: var(--lh-cta);
     font-weight: var(--fw-semibold);
     color: rgb(var(--white-base-rgb));
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: rgb(var(--blue-100-rgb));
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(var(--blue-200-rgb), 0.35);
 }
 
 
 /* Hero section */
 
 .section-hero {
-    padding: 0px;
+    padding-top: 160px;
 }
 
 .main-text-container {
@@ -155,11 +204,40 @@ body {
 
 .hero-cta-button {
     background-color: rgb(var(--blue-200-rgb));
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    animation: btnAppear 0.5s ease both 0.3s;
+}
+
+.hero-cta-button:hover {
+    background-color: rgb(var(--blue-100-rgb));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(6, 90, 130, 0.5);
 }
 
 .catalog-button {
     border: solid 2px rgb(var(--blue-200-rgb));
     background-color: rgba(var(--white-bg-rgb), 0.15);
+    transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    animation: btnAppear 0.5s ease both 0.5s;
+}
+
+.catalog-button:hover {
+    border-color: rgb(var(--white-bg-rgb));
+    background-color: rgba(var(--white-bg-rgb), 0.28);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes btnAppear {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .hero-cta-button,
@@ -182,10 +260,35 @@ body {
     margin-top: 24px;
 }
 
+@keyframes statAppear {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .block-of-statistic {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: statAppear 0.6s ease both;
+}
+
+.block-of-statistic:nth-child(1) {
+    animation-delay: 0.6s;
+}
+
+.block-of-statistic:nth-child(2) {
+    animation-delay: 0.8s;
+}
+
+.block-of-statistic:nth-child(3) {
+    animation-delay: 1.0s;
 }
 
 .number-of-statistic,
@@ -213,7 +316,7 @@ body {
     overflow: hidden;
 }
 
-.card-line {
+.value-card-line {
     position: absolute;
     top: 0;
     left: 0;
@@ -324,7 +427,7 @@ body {
 }
 
 .popular-card1 {
-    background-image: url('../images/GEELY.png');
+    background-image: url('../images/cars/GEELY.png');
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 20px;
@@ -332,7 +435,7 @@ body {
 }
 
 .popular-card2 {
-    background-image: url('../images/Renault.png');
+    background-image: url('../images/cars/Renault.png');
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 20px;
@@ -340,7 +443,7 @@ body {
 }
 
 .popular-card3 {
-    background-image: url('../images/Kia.png');
+    background-image: url('../images/cars/Kia.png');
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 20px;
@@ -376,10 +479,21 @@ body {
 
 .pop-button {
     padding: 12px 18px;
-    border: none;
+    border: 2px solid transparent;
     border-radius: 40px;
     background-color: rgb(var(--blue-100-rgb));
     color: rgb(var(--blue-300-rgb));
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease,
+        transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.pop-button:hover {
+    background-color: rgb(var(--blue-300-rgb));
+    color: rgb(var(--white-bg-rgb));
+    border-color: rgb(var(--blue-100-rgb));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(27, 59, 111, 0.55);
 }
 
 /* ==== Block Catalog ==== */
@@ -389,7 +503,8 @@ body {
     color: rgb(var(--blue-100-rgb));
     display: flex;
     justify-self: center;
-    width: 900px;
+    max-width: 900px;
+    width: 100%;
     text-align: center;
 }
 
@@ -431,7 +546,8 @@ body {
     display: flex;
     flex-direction: row;
     gap: 50px;
-    width: 1075px; 
+    max-width: 1075px;
+    width: 100%;
     overflow: hidden;
     scroll-behavior: smooth;
     flex-shrink: 0;
@@ -544,7 +660,7 @@ body {
 
 .under-line {
     position: absolute;
-    width: 1201px;
+    width: 100%;
     margin-top: 15px;
     height: 1px;
     background-color: rgb(var(--blue-400-rgb));
@@ -722,6 +838,7 @@ body {
     display: flex;
     flex-direction: row;
     gap: 40px;
+    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .modalcat-back img {
@@ -797,7 +914,7 @@ body {
     gap: 19px;
 }
 
-.model-line {
+.modal-line {
     width: 100%;
     height: 1px;
     background-color: rgb(var(--blue-100-rgb));
@@ -997,7 +1114,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 653px;
+    max-width: 653px;
+    width: 100%;
 
     color: rgb(var(--blue-400-rgb));
 }
@@ -1016,7 +1134,8 @@ body {
 
 .feedback-title {
     color: rgb(var(--blue-400-rgb));
-    width: 580px;
+    max-width: 580px;
+    width: 100%;
     display: flex;
     text-align: center;
 }
@@ -1045,15 +1164,63 @@ body {
 
 /* ==== CTA Modal ==== */
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(32px) scale(0.97);
+    }
+}
+
 .modal-section {
     position: fixed;
     inset: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(20px);
+    background-color: rgba(0, 0, 0, 0.65);
     z-index: 1000;
+    animation: fadeIn 0.25s ease;
+}
+
+.modal-section--closing {
+    animation: fadeOut 0.3s ease-in forwards;
 }
 
 .modalcta-back {
@@ -1067,16 +1234,33 @@ body {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 
-.model-close {
+.modal-close {
     position: absolute;
     top: 20px;
     right: 20px;
     background-color: rgb(var(--white-bg-rgb));
     padding: 10px;
     border-radius: 24px;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.modal-close:hover {
+    background-color: rgb(var(--blue-300-rgb));
+    transform: scale(1.1);
+}
+
+.modal-close img {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.modal-close:hover img {
+    transform: rotate(90deg);
+    filter: brightness(10);
 }
 
 .modalcta-title {

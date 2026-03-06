@@ -1,13 +1,20 @@
+import { useState } from 'react';
 import crossIcon from '../assets/images/icons/cross-icon.svg';
 
 function CTAmodal({ onClose }) {
 
+    const [isClosing, setIsClosing] = useState(false);
+
+    const handleClose = () => {
+        setIsClosing(true);
+        setTimeout(onClose, 300);
+    };
 
     return (
-        <section className="modal-section">
+        <section className={`modal-section${isClosing ? ' modal-section--closing' : ''}`} onClick={handleClose}>
             <div className="container">
-                <div className="modalcta-back">
-                    <button className='model-close' onClick={onClose}>
+                <div className="modalcta-back" onClick={(e) => e.stopPropagation()}>
+                    <button className='modal-close' onClick={handleClose}>
                         <img src={crossIcon} alt='cross-icon' />
                     </button>
                     <div className="modalcta-title text-display-xl">

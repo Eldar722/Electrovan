@@ -18,15 +18,15 @@ function App() {
         <Header />
         <HeroSection />
       </div>
-        <ValueSection />
-        <DirectionsSection />
-        <PopularCarSection />
-        <CatalogSection />
-        <BenefitsSection />
-        <HelpPageSection />
-        <TrustSection />
-        <CTASection />
-        <Footer />
+      <ValueSection />
+      <DirectionsSection />
+      <PopularCarSection />
+      <CatalogSection />
+      <BenefitsSection />
+      <HelpPageSection />
+      <TrustSection />
+      <CTASection />
+      <Footer />
     </>
   );
 }
