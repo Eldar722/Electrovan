@@ -498,6 +498,7 @@ body {
     margin-top: 80px;
     color: rgb(var(--blue-400-rgb));
     scroll-behavior: smooth;
+    height: 1500px;
 }
 
 .catalog-help {

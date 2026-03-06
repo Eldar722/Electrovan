@@ -29,7 +29,6 @@ function Catalog() {
 
         requestAnimationFrame(() => {
             catalogRef.current?.scrollIntoView({
-
                 block: "start",
             });
         });
@@ -72,16 +71,16 @@ function Catalog() {
                             <div className='top-line' ref={lineRef} ></div>
                         </div>
                     </div>
-                <section className='catalog-cards'>
-                    {currentCars.map((car) => (
-                        <CatalogCard key={car.id} car={car} />
-                    ))}
-                </section>
+                    <section className='catalog-cards'>
+                        {currentCars.map((car) => (
+                            <CatalogCard key={car.id} car={car} />
+                        ))}
+                    </section>
+                </div>
                     <Paginator 
                     totalPages={totalPages} 
                     currentPage={currentPage} 
                     setCurrentPage={handlePageChange} />
-                </div>
             </div>
         </section>
     )
