@@ -27,7 +27,7 @@ function Hero() {
             <div className="container hero-content">
                 <div className="main-text-container">
                     <h1 className="main-text-hero text-display-xl">
-                        <span className="highlight">Электро</span> транспорт —
+                        <span className="highlight">Электро</span> транспорт -
                         <br />наше реальное
                         <br />будущее
                     </h1>

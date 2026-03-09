@@ -4,11 +4,16 @@ import routeIcon from '../assets/images/icons/route-icon.svg';
 import vanIcon from '../assets/images/icons/van-icon.svg';
 import tengeIcon from '../assets/images/icons/tengeDark-icon.svg';
 import CatalogModal from './Catalog-modal';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 function CatalogCard() {
     const [isOpen, setIsOpen] = useState(false);
+    const scroller = useRef(null);
     console.log(isOpen);
+
+    const atMe = () =>{
+        scroller.current.scrollTo({ top:0, behavior: "smooth"});
+    };
 
     return (
         <section className='catalog-cards'>
@@ -17,7 +22,7 @@ function CatalogCard() {
                 <div className='card-titles'>
                     <div className='text-body-lg'>Geely Farizon SuperVan</div>
                     <div className='text-caption title-in'>Поместится до 10 человек</div>
-                    <div className='card-line'></div>
+                    <div className='catalog-line'></div>
                     <div className='card-params'>
                         <div className='one-param text-body-md'>
                             <img src={batteryIcon} alt='battery-icon' />
@@ -32,7 +37,7 @@ function CatalogCard() {
                             1.8тонн
                         </div>
                     </div>
-                    <div className='card-line'></div>
+                    <div className='catalog-line'></div>
                     <div className='card-price'>
                         <div className='card-cost text-caption'>
                             от 12.000.000
@@ -50,7 +55,7 @@ function CatalogCard() {
                 <div className='card-titles'>
                     <div className='text-body-lg'>Geely Farizon SuperVan</div>
                     <div className='text-caption title-in'>Поместится до 10 человек</div>
-                    <div className='card-line'></div>
+                    <div className='catalog-line'></div>
                     <div className='card-params'>
                         <div className='one-param text-body-md'>
                             <img src={batteryIcon} alt='battery-icon' />
@@ -65,7 +70,7 @@ function CatalogCard() {
                             1.8тонн
                         </div>
                     </div>
-                    <div className='card-line'></div>
+                    <div className='catalog-line'></div>
                     <div className='card-price'>
                         <div className='card-cost text-caption'>
                             от 12.000.000
@@ -83,7 +88,7 @@ function CatalogCard() {
                 <div className='card-titles'>
                     <div className='text-body-lg'>Geely Farizon SuperVan</div>
                     <div className='text-caption title-in'>Поместится до 10 человек</div>
-                    <div className='card-line'></div>
+                    <div className='catalog-line'></div>
                     <div className='card-params'>
                         <div className='one-param text-body-md'>
                             <img src={batteryIcon} alt='battery-icon' />
@@ -98,7 +103,7 @@ function CatalogCard() {
                             1.8тонн
                         </div>
                     </div>
-                    <div className='card-line'></div>
+                    <div className='catalog-line'></div>
                     <div className='card-price'>
                         <div className='card-cost text-caption'>
                             от 12.000.000
@@ -116,7 +121,7 @@ function CatalogCard() {
                 <div className='card-titles'>
                     <div className='text-body-lg'>Geely Farizon SuperVan</div>
                     <div className='text-caption title-in'>Поместится до 10 человек</div>
-                    <div className='card-line'></div>
+                    <div className='catalog-line'></div>
                     <div className='card-params'>
                         <div className='one-param text-body-md'>
                             <img src={batteryIcon} alt='battery-icon' />
@@ -131,7 +136,7 @@ function CatalogCard() {
                             1.8тонн
                         </div>
                     </div>
-                    <div className='card-line'></div>
+                    <div className='catalog-line'></div>
                     <div className='card-price'>
                         <div className='card-cost text-caption'>
                             от 12.000.000

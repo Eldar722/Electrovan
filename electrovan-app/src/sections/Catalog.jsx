@@ -4,7 +4,7 @@ import Paginator from '../components/Paginator';
 import Brands from '../components/BrandsCarousel';
 
 
-function Catalog() { 
+function Catalog() {
     const cars = [
     { id: 1, name: "Geely Farizon" },
     { id: 2, name: "BYD T3" },
@@ -15,6 +15,7 @@ function Catalog() {
     
     const itemPerPage = 3;
     const [currentPage, setCurrentPage] = useState(1);
+    const catalogRef = useRef(null);
 
     const totalPages = Math.ceil(cars.length / itemPerPage);
     const start = (currentPage - 1) * itemPerPage;
@@ -22,6 +23,16 @@ function Catalog() {
 
     const wrapperRef = useRef(null);
     const lineRef = useRef(null);
+    
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+
+        requestAnimationFrame(() => {
+            catalogRef.current?.scrollIntoView({
+                block: "start",
+            });
+        });
+    };
 
     const moveLine = (e) => {
         const button = e.currentTarget;
@@ -42,7 +53,7 @@ function Catalog() {
                     </div>
                 </div>
                 <Brands />
-                <div className='full-catalog'>
+                <div className='full-catalog' ref={catalogRef}>
                     <div className='text-display-xl'>Наш полный каталог</div>
                         <div className='catalog-help text-heading-lg'>
                             Не знаете как выбрать правильно?
@@ -60,14 +71,16 @@ function Catalog() {
                             <div className='top-line' ref={lineRef} ></div>
                         </div>
                     </div>
-                    {currentCars.map((car) => (
-                        <CatalogCard key={car.id} car={car} />
-                    ))}
+                    <section className='catalog-cards'>
+                        {currentCars.map((car) => (
+                            <CatalogCard key={car.id} car={car} />
+                        ))}
+                    </section>
+                </div>
                     <Paginator 
                     totalPages={totalPages} 
                     currentPage={currentPage} 
-                    setCurrentPage={setCurrentPage} />
-                </div>
+                    setCurrentPage={handlePageChange} />
             </div>
         </section>
     )

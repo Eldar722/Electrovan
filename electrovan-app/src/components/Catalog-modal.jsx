@@ -65,7 +65,7 @@ function CatalogModal({ onClose }) {
                             <button className='guarantees-button text-caption'>
                                 Условия гарантии
                             </button>
-                            <div className='modal-line'></div>
+                            <div className='model-line'></div>
                             <div className='modal-price'>
                                 <div className='modal-cost text-body-md'>
                                     Стоимость: ~16.921.855
