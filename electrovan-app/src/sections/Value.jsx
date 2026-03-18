@@ -6,7 +6,9 @@ function Value() {
 
     useEffect(() => {
         const animations = [];
-
+        const isMobile = window.innerWidth <= 768;
+        
+        // Setup GSAP animations for all cards
         cardsRef.current.forEach((card) => {
             if (!card) return;
 
@@ -19,14 +21,50 @@ function Value() {
                 transformOrigin: "left center",
             });
 
-            const onEnter = () => anim.play();
-            const onLeave = () => anim.reverse();
+            const onEnter = () => {
+                anim.play();
+                card.classList.add('focused');
+            };
+            const onLeave = () => {
+                anim.reverse();
+                card.classList.remove('focused');
+            };
 
-            card.addEventListener("mouseenter", onEnter);
-            card.addEventListener("mouseleave", onLeave);
+            if (!isMobile) {
+                // Desktop hover behavior
+                card.addEventListener("mouseenter", onEnter);
+                card.addEventListener("mouseleave", onLeave);
+            }
 
             animations.push({ card, anim, onEnter, onLeave });
         });
+
+        // Mobile Intersection Observer (scroll snapping trigger)
+        let observer;
+        if (isMobile) {
+            observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        const targetAnim = animations.find(a => a.card === entry.target);
+                        if (targetAnim) {
+                            if (entry.isIntersecting) {
+                                targetAnim.onEnter();
+                            } else {
+                                targetAnim.onLeave();
+                            }
+                        }
+                    });
+                },
+                {
+                    root: document.querySelector('.value-block'),
+                    threshold: 0.8 // Trigger when at least 80% of the card is visible (snapped in center)
+                }
+            );
+
+            cardsRef.current.forEach((card) => {
+                if (card) observer.observe(card);
+            });
+        }
 
         return () => {
             animations.forEach(({ card, anim, onEnter, onLeave }) => {
@@ -34,8 +72,24 @@ function Value() {
                 card.removeEventListener("mouseleave", onLeave);
                 anim.kill();
             });
+            if (observer) observer.disconnect();
         };
     }, []);
+
+    const handleCardClick = (index) => {
+        if (window.innerWidth <= 768 && cardsRef.current[index]) {
+            const container = document.querySelector('.value-block');
+            const targetCard = cardsRef.current[index];
+            if (container && targetCard) {
+                // Calculate position to center the card
+                const scrollPos = targetCard.offsetLeft - (container.clientWidth / 2) + (targetCard.clientWidth / 2);
+                container.scrollTo({
+                    left: scrollPos,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    };
 
     return (
         <section className="page-white">
@@ -45,7 +99,7 @@ function Value() {
                     <p className="section-description text-body-md text-blue-200">Конкретные выгоды и результаты, которые получает ваш бизнес. Измеримо, прозрачно, гарантировано.</p>
                 </div>
                 <div className="value-block">
-                    <div className="value-card" ref={(el) => (cardsRef.current[0] = el)}>
+                    <div className="value-card" ref={(el) => (cardsRef.current[0] = el)} onClick={() => handleCardClick(0)}>
                         <div className="value-card-line"></div>
                         <div className="number-block text-body-lg">01</div>
                         <div className="title-subtitle-block">
@@ -57,7 +111,7 @@ function Value() {
                             <p className="advantage text-caption">Окупаемость за 8-12 месяцев</p>
                         </div>
                     </div>
-                    <div className="value-card" ref={(el) => (cardsRef.current[1] = el)}>
+                    <div className="value-card" ref={(el) => (cardsRef.current[1] = el)} onClick={() => handleCardClick(1)}>
                         <div className="value-card-line"></div>
                         <div className="number-block text-body-lg">02</div>
                         <div className="title-subtitle-block">
@@ -69,7 +123,7 @@ function Value() {
                             <p className="advantage text-caption">Постоянная техническая поддержка</p>
                         </div>
                     </div>
-                    <div className="value-card" ref={(el) => (cardsRef.current[2] = el)}>
+                    <div className="value-card" ref={(el) => (cardsRef.current[2] = el)} onClick={() => handleCardClick(2)}>
                         <div className="value-card-line"></div>
                         <div className="number-block text-body-lg">03</div>
                         <div className="title-subtitle-block">

@@ -1,18 +1,19 @@
-import PopularCard from '../components/Popular-card';
+import PopularCard from '../components/PopularCard';
+import { popularcar } from '../data/popularcar';
 
 function PopularCar() {
     return (
         <section className='catalog-section'>
-        <div className='container'>
-          <div className='catalog-title'>
-            <div className='text-display-xl'>
-              Наши популярные модели
+            <div className='container'>
+                <div className='catalog-title'>
+                    <div className='text-display-xl'>
+                        Наши популярные модели
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <PopularCard />
-      </section>
-    )
+            <PopularCard popularcar={popularcar} />
+        </section>
+    );
 }
 
 export default PopularCar;

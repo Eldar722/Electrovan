@@ -3,7 +3,7 @@ import TelegramIcon from "../assets/images/socials/telegram.svg"
 
 function Footer() {
     return (
-        <footer className="page-blue">
+        <footer className="page-blue" id="contacts">
             <div className="container">
                 <div className="footer-container">
                     <div className="footer-brand">

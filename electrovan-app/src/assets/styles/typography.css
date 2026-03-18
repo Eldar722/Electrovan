@@ -43,3 +43,15 @@
     line-height: var(--lh-caption);
     font-weight: var(--fw-regular);
 }
+
+.text-caption-sm {
+    font-size: var(--fs-caption-sm);   /* 12px */
+    line-height: var(--lh-caption-sm);
+    font-weight: var(--fw-semibold);
+}
+
+.text-tiny {
+    font-size: var(--fs-tiny);         /* 10px */
+    line-height: var(--lh-tiny);
+    font-weight: var(--fw-medium);
+}

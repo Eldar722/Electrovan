@@ -1,0 +1,92 @@
+import geelyCardImg from '../assets/images/cars/geely-card.png';
+import farizonModelImg from '../assets/images/cars/farizon-model.png';
+import geelyPopularImg from '../assets/images/cars/GEELY.png';
+import renaultPopularImg from '../assets/images/cars/Renault.png';
+import kiaPopularImg from '../assets/images/cars/Kia.png';
+
+export const cars = [
+    {
+        id: 1,
+        brand: "Geely",
+        model: "Farizon SuperVan",
+        capacity: "Поместится до 10 человек",
+        description: "Используется в Логистике, Туризме, Аренде.",
+        usedIn: ["Логистика", "Туризм", "Аренда"],
+        battery: "83кВт*ч",
+        range: "450км",
+        weight: "1.8тонн",
+        dimensions: "5490х1980х2500",
+        volume: "9,39 куб.м",
+        seats: 7,
+        warranty: true,
+        price: "12.000.000",
+        fullPrice: "16.921.855",
+        image: geelyCardImg,
+        modalImage: farizonModelImg,
+        category: "Пассажирские",
+        isPopular: true,
+        popularBg: geelyPopularImg
+    },
+    {
+        id: 2,
+        brand: "Renault",
+        model: "Master Z.E.",
+        capacity: "Надёжный партнёр для города",
+        description: "Идеально подходит для городских доставок и экологичного бизнеса.",
+        usedIn: ["Доставка", "Экологичный бизнес", "Городской транспорт"],
+        battery: "52кВт*ч",
+        range: "200км",
+        weight: "1.1тонн",
+        dimensions: "5548х2070х2499",
+        volume: "10,8 куб.м",
+        seats: 3,
+        warranty: true,
+        price: "12.000.000",
+        image: geelyCardImg,
+        modalImage: farizonModelImg,
+        category: "Грузовые",
+        isPopular: true,
+        popularBg: renaultPopularImg
+    },
+    {
+        id: 3,
+        brand: "Kia",
+        model: "PV5",
+        capacity: "Будущее коммерческого транспорта",
+        description: "Модульная платформа для любых задач вашего бизнеса.",
+        usedIn: ["Бизнес", "Грузоперевозки", "Пассажирские перевозки"],
+        battery: "77кВт*ч",
+        range: "400км",
+        weight: "1.2тонн",
+        dimensions: "4700х1900х1900",
+        volume: "7,5 куб.м",
+        seats: 5,
+        warranty: true,
+        price: "12.000.000",
+        image: geelyCardImg,
+        modalImage: farizonModelImg,
+        category: "Грузо-пассажирские",
+        isPopular: true,
+        popularBg: kiaPopularImg
+    },
+    {
+        id: 4,
+        brand: "Farizon",
+        model: "Cargo E6",
+        capacity: "Максимальный объём загрузки",
+        description: "Грузовой фургон для работы в тяжёлых городских условиях.",
+        usedIn: ["Строительство", "Логистика", "Опт и ритейл"],
+        battery: "80кВт*ч",
+        range: "350км",
+        weight: "2.5тонн",
+        dimensions: "5990х2000х2800",
+        volume: "12 куб.м",
+        seats: 2,
+        warranty: true,
+        price: "14.500.000",
+        image: geelyCardImg,
+        modalImage: farizonModelImg,
+        category: "Грузовые",
+        isPopular: false
+    }
+];
