@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SingleCard from './SingleCard.jsx';
 import CatalogModal from './CatalogModal.jsx';
 
-function CatalogCard({ cars = [] }) {
+function CatalogCard({ cars = [], onOpenModal }) {
     const [selectedCar, setSelectedCar] = useState(null);
 
     return (
@@ -22,6 +22,7 @@ function CatalogCard({ cars = [] }) {
                 <CatalogModal
                     car={selectedCar}
                     onClose={() => setSelectedCar(null)}
+                    onOpenCtaModal={onOpenModal}
                 />
             )}
         </>
@@ -30,6 +31,7 @@ function CatalogCard({ cars = [] }) {
 
 CatalogCard.propTypes = {
     cars: PropTypes.array,
+    onOpenModal: PropTypes.func,
 };
 
 export default CatalogCard;

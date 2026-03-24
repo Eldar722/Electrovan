@@ -6,7 +6,7 @@ import { useCatalogStore } from '../store/useCatalogStore.js';
 
 const CATEGORIES = ['Все', 'Грузовые', 'Пассажирские', 'Грузо-пассажирские'];
 
-function Catalog() {
+function Catalog({ onOpenModal }) {
     const activeCategory = useCatalogStore((s) => s.activeCategory);
     const currentPage    = useCatalogStore((s) => s.currentPage);
     const setCategory    = useCatalogStore((s) => s.setCategory);
@@ -51,7 +51,13 @@ function Catalog() {
                     <div className='text-display-xl'>Наш полный каталог</div>
                     <div className='catalog-help text-heading-lg'>
                         Не знаете как выбрать правильно?
-                        <button className='help-button'>
+                        <button
+                            className='help-button'
+                            onClick={() => {
+                                const el = document.getElementById('help');
+                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                        >
                             Помощь в выборе
                         </button>
                     </div>
@@ -72,7 +78,7 @@ function Catalog() {
                             <div className='top-line' ref={lineRef}></div>
                         </div>
                     </div>
-                    <CatalogCard cars={getCurrentCars()} />
+                    <CatalogCard cars={getCurrentCars()} onOpenModal={onOpenModal} />
                 </div>
                 <Paginator
                     totalPages={getTotalPages()}

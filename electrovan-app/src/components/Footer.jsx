@@ -1,7 +1,7 @@
 import WhatsappIcon from "../assets/images/socials/whatsapp.svg"
 import TelegramIcon from "../assets/images/socials/telegram.svg"
 
-function Footer() {
+function Footer({ onOpenModal }) {
     return (
         <footer className="page-blue" id="contacts">
             <div className="container">
@@ -35,7 +35,7 @@ function Footer() {
                         <h3 className="footer-title text-heading-lg text-white-base">Контакты</h3>
                         <a href="tel:+77777777777" className="footer-phone text-body-lg text-white-base">+7 777 777 77 77</a>
                         <a href="mailto:info@electrovan.kz" className="footer-email text-body-lg text-white-base">info@electrovan.kz</a>
-                        <button className="footer-cta-btn text-body-lg">Рассчитать экономию</button>
+                        <button className="footer-cta-btn text-body-lg" onClick={onOpenModal}>Рассчитать экономию</button>
                         <div className="footer-warranty text-white-base">Гарантия до <strong>50 000 км</strong></div>
                     </div>
                 </div>

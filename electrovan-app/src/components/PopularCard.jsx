@@ -1,6 +1,6 @@
 import tengeIcon from '../assets/images/icons/tenge.svg';
 
-function PopularCard({ popularcar = [] }) {
+function PopularCard({ popularcar = [], onOpenModal }) {
     return (
         <section className='popular-cards'>
             {popularcar.map((car) => (
@@ -27,12 +27,10 @@ function PopularCard({ popularcar = [] }) {
                                 ))}
                             </div>
                         </div>
-                        <div className='button-block'>
-                            <div className='text-body-md'>
+                        <div className='button-block text-body-md'>
                                 Стало интересно?
-                            </div>
-                            <button className='pop-button'>
-                                <div className='text-body-md'>Узнать подробности</div>
+                            <button className='pop-button text-body-md' onClick={onOpenModal}>
+                                Узнать подробности
                             </button>
                         </div>
                     </div>

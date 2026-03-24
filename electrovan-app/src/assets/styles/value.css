@@ -97,5 +97,7 @@
     
     .value-card-line {
         height: 4px;
+        transform: scaleX(0); /* Reset: GSAP will animate from here */
+        transform-origin: left center;
     }
 }

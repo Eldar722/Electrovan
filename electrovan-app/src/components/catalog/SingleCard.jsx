@@ -7,10 +7,12 @@ import tengeIcon from '../../assets/images/icons/tengeDark-icon.svg';
 function SingleCard({ car, onSelect }) {
     return (
         <div className='card'>
-            <img src={car.image} alt={`${car.brand} ${car.model}`} className='card-img' />
+            <div className='card-img-wrap'>
+                <img src={car.image} alt={`${car.brand} ${car.model}`} className='card-img' />
+            </div>
             <div className='card-titles'>
-                <div className='text-body-lg'>{car.brand} {car.model}</div>
-                <div className='text-caption title-in'>{car.capacity}</div>
+                <div className='text-body-lg card-inner-title'>{car.brand} {car.model}</div>
+                <div className='text-caption title-in card-inner-description'>{car.capacity}</div>
                 <div className='catalog-line'></div>
                 <div className='card-params'>
                     <div className='one-param text-body-md'>

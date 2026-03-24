@@ -15,17 +15,28 @@ import CTAmodal from './components/CTAmodal.jsx'
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isToastClosing, setIsToastClosing] = useState(false);
     const [showToast, setShowToast] = useState(false);
 
     const handleFormSubmit = () => {
         setShowToast(true);
-        setTimeout(() => setShowToast(false), 4000);
+        setIsToastClosing(false);
+
+        // Start closing animation after 3.7s
+        setTimeout(() => {
+            setIsToastClosing(true);
+            // Completely remove from DOM after animation (300ms)
+            setTimeout(() => {
+                setShowToast(false);
+                setIsToastClosing(false);
+            }, 300);
+        }, 3700);
     };
 
     return (
         <>
             {showToast && (
-                <div className="toast">
+                <div className={`toast ${isToastClosing ? 'toast--closing' : ''}`}>
                     Заявка отправлена! Мы свяжемся с вами в ближайшее время.
                 </div>
             )}
@@ -43,13 +54,13 @@ function App() {
             </div>
             <ValueSection />
             <DirectionsSection id="directions" />
-            <PopularCarSection />
-            <CatalogSection id="catalog" />
+            <PopularCarSection onOpenModal={() => setIsModalOpen(true)}/>
+            <CatalogSection id="catalog" onOpenModal={() => setIsModalOpen(true)} />
             <BenefitsSection />
             <HelpPageSection id="help" />
             <TrustSection id="guarantee" />
             <CTASection onOpenModal={() => setIsModalOpen(true)} />
-            <Footer id="contacts" />
+            <Footer id="contacts" onOpenModal={() => setIsModalOpen(true)}/>
         </>
     );
 }

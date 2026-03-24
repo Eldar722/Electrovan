@@ -1,7 +1,7 @@
 import PopularCard from '../components/PopularCard';
 import { popularcar } from '../data/popularcar';
 
-function PopularCar() {
+function PopularCar({ onOpenModal }) {
     return (
         <section className='catalog-section'>
             <div className='container'>
@@ -11,7 +11,7 @@ function PopularCar() {
                     </div>
                 </div>
             </div>
-            <PopularCard popularcar={popularcar} />
+            <PopularCard popularcar={popularcar} onOpenModal={onOpenModal}/>
         </section>
     );
 }

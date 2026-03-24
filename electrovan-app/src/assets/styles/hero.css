@@ -37,7 +37,7 @@
 }
 
 .alt-highlight {
-    color: rgb(var(--blue-100-rgb));
+    color: rgb(var(--blue-1выход00-rgb));
 }
 
 .hero-buttons {
@@ -154,7 +154,7 @@
 
     .main-text-container {
         max-width: 100%;
-        margin-bottom: 16px;
+        margin-bottom: 64px;
     }
 
     .sub-text-hero {

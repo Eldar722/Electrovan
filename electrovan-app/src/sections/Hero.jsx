@@ -18,7 +18,7 @@ function useCountUp(target, duration = 1600, delay = 600) {
     return value;
 }
 
-function Hero() {
+function Hero({ onOpenModal }) {
     const km = useCountUp(50000, 1800, 600);
     const economy = useCountUp(70, 1400, 800);
 
@@ -36,8 +36,15 @@ function Hero() {
                     <p className="sub-text-hero text-body-md">Хороший вариант для бизнеса. То что нужно, для коммерческих целей с <span className="alt-highlight">большой</span> выгодой.</p>
                 </div>
                 <div className="hero-buttons">
-                    <button className="hero-cta-button text-body-lg">Оставить заявку</button>
-                    <button className="catalog-button text-body-lg">Перейти к каталогу</button>
+                    <button className="hero-cta-button text-body-lg" onClick={onOpenModal}>Оставить заявку</button>
+                    <button
+                        className="catalog-button text-body-lg"
+                        onClick={() => {
+                            document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                    >
+                        Перейти к каталогу
+                    </button>
                 </div>
                 <hr className="line-under-cta" />
                 <div className="statistics">

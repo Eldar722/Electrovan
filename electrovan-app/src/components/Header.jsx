@@ -8,7 +8,7 @@ const navLinks = [
         { desktop: 'Контакты', mobile: 'Наши контакты', href: "#contacts"},
 ];
 
-function Header() {
+function Header({ onOpenModal }) {
     const [scrolled, setScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -40,9 +40,9 @@ function Header() {
                         {isMobile ? link.mobile : link.desktop}
                     </a>
                 ))}
-                <button className="cta-btn text-body-lg cta-btn--mobile">Оставить заявку</button>
+                <button className="cta-btn text-body-lg cta-btn--mobile" onClick={onOpenModal}>Оставить заявку</button>
             </nav>
-            <button className="cta-btn text-body-lg cta-btn--desktop">Оставить заявку</button>
+            <button className="cta-btn text-body-lg cta-btn--desktop" onClick={onOpenModal}>Оставить заявку</button>
             
             <button 
                 className={`menu-btn ${isMobileMenuOpen ? 'menu-btn--open' : ''}`} 

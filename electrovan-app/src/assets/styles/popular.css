@@ -78,3 +78,49 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(27, 59, 111, 0.55);
 }
+
+@media (max-width: 768px) {
+    .popular-cards {
+        min-height: unset;
+    }
+
+    /* Each card takes up at least the full phone screen height */
+    .popular-card1,
+    .popular-card2,
+    .popular-card3 {
+        min-height: 100svh;
+        min-height: 100vh;
+        padding-top: 80px; /* Clear the fixed header */
+        background-attachment: scroll; /* Disable parallax-like behaviour on iOS */
+        background-position: center center;
+    }
+
+    .popular-cost {
+        padding-top: 24px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .pop-why {
+        padding-top: 32px;
+    }
+
+    .pop-nuv {
+        padding-top: 16px;
+        gap: 10px;
+    }
+
+    .button-block {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: 32px;
+        gap: 12px;
+    }
+
+    .pop-button {
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+    }
+}
