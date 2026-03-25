@@ -66,3 +66,43 @@
 .total-calculation {
     flex: 0 0 auto;
 }
+
+/* ==== Mobile ==== */
+
+@media (max-width: 768px) {
+
+    .benefits-group {
+        gap: 24px;
+    }
+
+    .benefit-box {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .comparison-line {
+        height: 16px;
+    }
+
+    .comparison-header {
+        margin: 4px 0;
+    }
+
+    .benefit-comparison {
+        gap: 4px;
+        margin-bottom: 4px;
+    }
+
+    .calculation-group {
+        flex-direction: column;
+        margin: 16px 12px;
+        gap: 12px;
+    }
+
+    .average-calculation,
+    .total-calculation {
+        padding: 16px;
+        border-radius: 12px;
+        text-align: center;
+    }
+}

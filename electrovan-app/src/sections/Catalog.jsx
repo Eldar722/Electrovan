@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import CatalogCard from '../components/catalog/CatalogCard.jsx';
 import Paginator from '../components/Paginator';
 import Brands from '../components/BrandsCarousel';
@@ -8,6 +8,7 @@ const CATEGORIES = ['Все', 'Грузовые', 'Пассажирские', '�
 
 function Catalog({ onOpenModal }) {
     const activeCategory = useCatalogStore((s) => s.activeCategory);
+    const activeBrand    = useCatalogStore((s) => s.activeBrand);
     const currentPage    = useCatalogStore((s) => s.currentPage);
     const setCategory    = useCatalogStore((s) => s.setCategory);
     const setPage        = useCatalogStore((s) => s.setPage);
@@ -18,13 +19,27 @@ function Catalog({ onOpenModal }) {
     const wrapperRef = useRef(null);
     const lineRef    = useRef(null);
 
-    const moveLine = (e) => {
-        const button = e.currentTarget;
-        const buttonRect  = button.getBoundingClientRect();
+    const moveLine = (buttonElement) => {
+        if (!buttonElement || !wrapperRef.current || !lineRef.current) return;
+        const buttonRect  = buttonElement.getBoundingClientRect();
         const wrapperRect = wrapperRef.current.getBoundingClientRect();
         lineRef.current.style.left  = buttonRect.left - wrapperRect.left + 'px';
         lineRef.current.style.width = buttonRect.width + 'px';
     };
+
+    // Set initial line position and update when activeCategory changes
+    useEffect(() => {
+        // Use a small timeout to ensure DOM is fully rendered before measuring
+        const timer = setTimeout(() => {
+            if (wrapperRef.current) {
+                const activeButton = wrapperRef.current.querySelector(`button[data-category="${activeCategory}"]`);
+                if (activeButton) {
+                    moveLine(activeButton);
+                }
+            }
+        }, 50);
+        return () => clearTimeout(timer);
+    }, [activeCategory]);
 
     const handlePageChange = (page) => {
         setPage(page);
@@ -34,7 +49,7 @@ function Catalog({ onOpenModal }) {
     };
 
     const handleCategoryChange = (cat, e) => {
-        moveLine(e);
+        moveLine(e.currentTarget);
         setCategory(cat);
     };
 

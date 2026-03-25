@@ -7,13 +7,24 @@ export const useCatalogStore = create((set, get) => ({
     // --- Данные ---
     cars,
 
-    // --- Фильтрация ---
+    // --- Фильтрация по категории ---
     activeCategory: 'Все',
 
     setCategory: (category) => set({
         activeCategory: category,
         currentPage: 1,
     }),
+
+    // --- Фильтрация по бренду ---
+    activeBrand: null,
+
+    setBrand: (brand) => {
+        const current = get().activeBrand;
+        set({
+            activeBrand: current === brand ? null : brand,
+            currentPage: 1,
+        });
+    },
 
     // --- Пагинация ---
     currentPage: 1,
@@ -23,9 +34,18 @@ export const useCatalogStore = create((set, get) => ({
 
     // --- Вычисляемые значения ---
     getFilteredCars: () => {
-        const { cars, activeCategory } = get();
-        if (activeCategory === 'Все') return cars;
-        return cars.filter((car) => car.category === activeCategory);
+        const { cars, activeCategory, activeBrand } = get();
+        let filtered = cars;
+
+        if (activeBrand) {
+            filtered = filtered.filter((car) => car.brand === activeBrand);
+        }
+
+        if (activeCategory !== 'Все') {
+            filtered = filtered.filter((car) => car.category === activeCategory);
+        }
+
+        return filtered;
     },
 
     getCurrentCars: () => {

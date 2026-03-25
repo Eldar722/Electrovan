@@ -5,7 +5,8 @@ import VolkswagenIcon from '../assets/images/brands/volkswagen-icon.svg?react';
 import LixiangIcon from '../assets/images/brands/lixiang-icon.svg?react';
 import backIcon from '../assets/images/icons/back-icon.svg';
 import nextIcon from '../assets/images/icons/next-icon.svg';
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
+import { useCatalogStore } from '../store/useCatalogStore.js';
 
 const brands = [
     { id: 1, name: "Geely", Icon: GeelyIcon },
@@ -21,7 +22,9 @@ const brands = [
 ];
 
 function BrandCarousel() {
-    const [activeBrand, setActiveBrand] = useState(0);
+    const activeBrand = useCatalogStore((s) => s.activeBrand);
+    const setBrand = useCatalogStore((s) => s.setBrand);
+
     const scrollRef = useRef(null);
     const [activePage, setActivePage] = useState(0);
     const itemsPerPage = 5;
@@ -52,6 +55,15 @@ function BrandCarousel() {
         setActivePage(page);
     };
 
+    const handleBrandClick = (brandName) => {
+        setBrand(brandName);
+        // Scroll to catalog after selecting brand
+        requestAnimationFrame(() => {
+            const catalog = document.querySelector('.full-catalog');
+            if (catalog) catalog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    };
+
     return (
         <section className="brand-nuv">
             <div className='brand-carousel'>
@@ -65,8 +77,8 @@ function BrandCarousel() {
                             return (
                                 <button
                                     key={brand.id}
-                                    className={`brand-button ${activeBrand === brand.id ? "active" : ""}`}
-                                    onClick={() => setActiveBrand(brand.id)}
+                                    className={`brand-button ${activeBrand === brand.name ? "active" : ""}`}
+                                    onClick={() => handleBrandClick(brand.name)}
                                 >
                                     <Icon className="brand-icon" />
                                     {brand.name}
