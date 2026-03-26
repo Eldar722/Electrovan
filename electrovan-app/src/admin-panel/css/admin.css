@@ -1,0 +1,87 @@
+@import '../../assets/styles/reset.css';
+@import '../../assets/styles/typography.css';
+@import '../../assets/styles/variables.css';
+
+
+/* ==== LoginPage ==== */
+
+.login-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: 100vh;
+
+    background-color: rgb(var(--blue-400-rgb));
+}
+
+.login-hero {
+    color: rgb(var(--white-bg-rgb));
+}
+.login-subheader {
+    color: rgb(var(--white-bg-rgb));
+}
+
+.login-block {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: end;
+}
+
+.login-schedule {
+    padding: 30px 50px;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    background-color: rgb(var(--white-bg-rgb));
+    color: rgb(var(--blue-300-rgb));
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+}
+
+.login-schedule input {
+    padding: 15px;
+    width: 535px;
+    border-color: rgb(var(--blue-100-rgb));
+    color: rgb(var(--blue-100-rgb));
+    border-radius: 15px;
+    border: 1px solid;
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+
+.login-schedule input::placeholder {
+    color: rgb(var(--blue-100-rgb));
+}
+.login-schedule input:focus {
+    background-color: rgb(var(--blue-300-rgb));
+    color: rgb(var(--white-bg-rgb));
+}
+.login-schedule input:focus::placeholder {
+    color: rgb(var(--white-bg-rgb));
+}
+
+.login-button {
+    padding: 10px 50px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+
+    transition: 0.3s ease-in-out;
+    
+}
+.login-button:hover {
+    background-color: rgb(var(--blue-200-rgb));
+    color: rgb(var(--white-bg-rgb));
+    transform: translateY(-4px);
+}
+
+
+/* ==== HomePage ==== */
+
+.admin-section {
+
+}

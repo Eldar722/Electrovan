@@ -4,7 +4,7 @@ import vanLightIcon from '../assets/images/icons/vanLight-icon.svg';
 
 function HelpPage() {
     return (
-        <section className="help-section">
+        <section className="help-section" id="help">
             <div className="container">
                 <div className="help-title text-heading-xl">
                     Как сделать правильный <span>выбор?</span>

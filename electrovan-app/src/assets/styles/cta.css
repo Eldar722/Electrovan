@@ -1,0 +1,237 @@
+/* ==== CTA ==== */
+
+.cta-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 653px;
+    width: 100%;
+
+    color: rgb(var(--blue-400-rgb));
+}
+
+.cta-title span {
+    color: rgb(var(--blue-200-rgb));
+}
+
+.cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.feedback-title {
+    color: rgb(var(--blue-400-rgb));
+    max-width: 580px;
+    width: 100%;
+    display: flex;
+    text-align: center;
+}
+
+.cta-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 15px 10px;
+    border: 3px solid;
+    border-radius: 10px;
+    border-color: rgb(var(--blue-100-rgb));
+    color: rgb(var(--blue-400-rgb));
+    background-color: rgb(var(--white-bg-rgb));
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: 0.5s ease-in-out;
+}
+
+.cta-button:hover {
+    border-color: rgb(var(--blue-200-rgb));
+    background-color: rgb(var(--blue-400-rgb));
+    color: rgb(var(--white-bg-rgb));
+}
+
+/* ==== CTA Modal ==== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(32px) scale(0.97);
+    }
+}
+
+.modal-section {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: 1100;
+    animation: fadeIn 0.25s ease;
+}
+
+.modal-section--closing {
+    animation: fadeOut 0.3s ease-in forwards;
+}
+
+.modalcta-back {
+    position: relative;
+    background-color: rgb(var(--blue-400-rgb));
+    min-height: 650px;
+    width: 80vw;
+    padding: 60px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgb(var(--white-bg-rgb));
+    padding: 10px;
+    border-radius: 24px;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.modal-close:hover {
+    background-color: rgb(var(--blue-300-rgb));
+    transform: scale(1.1);
+}
+
+.modal-close img {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.modal-close:hover img {
+    transform: rotate(90deg);
+    filter: brightness(10);
+}
+
+.modalcta-title {
+    color: rgb(var(--white-bg-rgb));
+    width: 470px;
+}
+
+.modalcta-title span {
+    color: rgb(var(--blue-100-rgb));
+}
+
+.modalcta-graphs {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    position: absolute;
+    top: 130px;
+    right: 100px;
+}
+
+.one-graph {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.graph-title {
+    color: rgb(var(--white-bg-rgb));
+}
+
+.text-graph {
+    padding: 16px 10px;
+    width: 471px;
+    border: 3px solid;
+    border-radius: 15px;
+    border-color: rgb(var(--blue-100-rgb));
+    color: rgb(var(--blue-200-rgb));
+
+    outline: none;
+}
+
+.text-graph::placeholder {
+    color: rgb(var(--blue-100-rgb));
+}
+
+.feedback-button {
+    margin-top: 120px;
+    display: flex;
+    align-self: flex-end;
+    width: fit-content;
+    padding: 10px 17px;
+    border-radius: 15px;
+    border: 3px solid;
+    border-color: rgb(var(--blue-100-rgb));
+    color: rgb(var(--blue-200-rgb));
+    transition: 0.3s ease-in-out;
+
+}
+
+.feedback-button:hover {
+    background-color: rgb(var(--blue-200-rgb));
+    color: rgb(var(--white-bg-rgb));
+}
+
+.toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1200;
+    background-color: rgb(var(--blue-200-rgb));
+    color: white;
+    padding: 16px 28px;
+    border-radius: 100px;
+    font-weight: var(--fw-semibold);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.3s ease;
+    white-space: nowrap;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}

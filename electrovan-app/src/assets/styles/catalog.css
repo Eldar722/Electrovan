@@ -1,0 +1,332 @@
+/* ==== Block Catalog ==== */
+
+.cat-title {
+    margin-top: 30px;
+    color: rgb(var(--blue-100-rgb));
+    display: flex;
+    justify-self: center;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+.cat-brand {
+    color: rgb(var(--blue-200-rgb));
+}
+
+.brand-nuv {
+    margin-top: 40px;
+    height: 230px;
+    width: 99vw;
+    padding: 25px 0px 25px 0px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-top: 5px solid;
+    border-bottom: 5px solid;
+    border-color: rgb(var(--blue-100-rgb));
+}
+
+.brand-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.carousel-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.brand-nuv img {
+    cursor: pointer;
+}
+
+.scroll-carousel {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    max-width: 1075px;
+    width: 100%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    flex-shrink: 0;
+}
+
+.scroll-btn {
+    background-color: rgb(var(--white-bg-rgb));
+}
+
+.brand-icon:hover {
+    color: rgb(var(--white-bg-rgb));
+}
+
+.brand-button {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    height: 150px;
+    width: 175px;
+    color: rgb(var(--blue-400-rgb));
+    background-color: rgb(var(--white-bg-rgb));
+    border: 5px solid;
+    border-color: rgb(var(--blue-100-rgb));
+    border-radius: 30px;
+    padding: 10px 35px;
+    transition: 0.3s ease-in-out;
+}
+
+.brand-button.active {
+    color: rgb(var(--white-bg-rgb));
+    background-color: rgb(var(--blue-200-rgb));
+}
+
+.brand-button:hover {
+    color: rgb(var(--white-bg-rgb));
+    background-color: rgb(var(--blue-200-rgb));
+}
+
+.indicator {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.brand-indicator {
+    background-color: rgb(var(--blue-200-rgb));
+    height: 5px;
+    width: 120px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.brand-indicator.active {
+    background-color: rgb(var(--blue-400-rgb));
+    height: 10px;
+}
+
+/* ==== Full Catalog ==== */
+
+.full-catalog {
+    margin-top: 80px;
+    color: rgb(var(--blue-400-rgb));
+    scroll-behavior: smooth;
+    height: 1500px;
+}
+
+.catalog-help {
+    margin-top: 45px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    color: rgb(var(--blue-200-rgb));
+}
+
+.help-button {
+    color: rgb(var(--blue-200-rgb));
+    background-color: rgb(var(--white-bg-rgb));
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: rgb(var(--blue-200-rgb));
+    padding: 5px 15px;
+    transition: 0.3s ease-in-out;
+}
+
+.help-button:hover {
+    background-color: rgb(var(--blue-200-rgb));
+    color: rgb(var(--white-bg-rgb));
+}
+
+.cat-wrapp {
+    position: relative;
+    width: 720px;
+    margin-top: 35px;
+}
+
+.catalog-categories {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+
+}
+
+.catalog-categories button {
+    background-color: rgb(var(--white-bg-rgb));
+    color: rgb(var(--blue-400-rgb));
+}
+
+.under-line {
+    position: absolute;
+    width: 1201px;
+    margin-top: 15px;
+    height: 1px;
+    background-color: rgb(var(--blue-400-rgb));
+}
+
+.top-line {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 6px;
+    width: 0;
+    border-radius: 10px;
+    background-color: rgb(var(--blue-200-rgb));
+    transition: all 0.3s ease;
+}
+
+/* ==== Catalog cards ==== */
+
+.catalog-cards {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 35px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 22px;
+    border: 1px solid;
+    border-color: rgb(var(--blue-100-rgb));
+    width: 274px;
+    max-height: fit-content;
+}
+
+.card-img {
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+}
+
+.card-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: rgb(var(--blue-400-rgb));
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.title-in {
+    color: rgb(var(--blue-100-rgb));
+}
+
+.catalog-line {
+    background-color: rgb(var(--blue-100-rgb));
+    height: 1px;
+    width: auto;
+}
+
+.card-params {
+    display: flex;
+    flex-direction: row;
+    gap: 23px;
+}
+
+.card-params img {
+    height: 35px;
+    width: 35px;
+}
+
+.one-param {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-price {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
+.card-cost {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card-cost img {
+    height: 13px;
+    width: 13px;
+    margin-left: -1px;
+}
+
+.card-button {
+    background-color: rgb(var(--white-bg-rgb));
+    color: rgb(var(--blue-200-rgb));
+
+    border: 1px solid;
+    border-color: rgb(var(--blue-200-rgb));
+    border-radius: 8px;
+    padding: 3px 2px;
+
+    transition: 0.2s ease-in-out;
+}
+
+.card-button:hover {
+    background-color: rgb(var(--blue-200-rgb));
+    color: rgb(var(--white-bg-rgb));
+}
+
+.catalog-cars {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+
+/* ==== Paginator ==== */
+
+.paginator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    color: rgb(var(--blue-100-rgb));
+}
+
+.paginator button {
+    background-color: rgb(var(--white-bg-rgb));
+    color: rgb(var(--blue-100-rgb));
+    transition: 0.2s ease-in-out;
+}
+
+.paginator img {
+    border: 2px solid;
+    border-radius: 30px;
+    border-color: rgb(var(--blue-400-rgb));
+    transition: 0.2s ease-in-out;
+
+}
+
+.paginator img:hover {
+    background-color: rgb(var(--blue-100-rgb));
+}
+
+.paginator button.active {
+    color: rgb(var(--blue-400-rgb));
+}
+
+.paginator button:hover {
+    color: rgb(var(--blue-400-rgb));
+}
+
+.paginator .dots {
+    padding-right: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}

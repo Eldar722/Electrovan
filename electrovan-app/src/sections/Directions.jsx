@@ -1,19 +1,16 @@
-import DirCard from "../components/directions-card";
+import DirCard from "../components/DirectionsCard";
 
 function Directions() {
-    return (
-        <section className="directions">
-        <div className='container'>
-          <div className='directions-title text-heading-xl'>
-              Где удобно использовать?
-              <div className='text-body-md subdirections-title'>
-                комфорт услуг в сферах
-              </div>
-          </div>
-          <DirCard />
+  return (
+    <section className="directions" id="directions">
+      <div className='container'>
+        <div className='directions-title text-heading-xl'>
+          Где удобно использовать?
         </div>
-      </section>
-    )
+        <DirCard />
+      </div>
+    </section>
+  )
 }
 
 export default Directions;
