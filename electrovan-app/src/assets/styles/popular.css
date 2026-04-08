@@ -9,28 +9,34 @@
     min-height: 100vh;
 }
 
-.popular-card1 {
-    background-image: url('../images/cars/GEELY.png');
+.popular-card1,
+.popular-card2,
+.popular-card3 {
+    position: relative;
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 20px;
     color: rgb(var(--white-bg-rgb));
+}
+
+.popular-card1 {
+    background-image: url('../images/cars/GEELY.png');
+    background-position: 60% center;
 }
 
 .popular-card2 {
     background-image: url('../images/cars/Renault.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding-top: 20px;
-    color: rgb(var(--white-bg-rgb));
+    background-position: 55% center;
 }
 
 .popular-card3 {
     background-image: url('../images/cars/Kia.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding-top: 20px;
-    color: rgb(var(--white-bg-rgb));
+    background-position: 65% center;
+}
+
+/* Mobile image block — hidden on desktop */
+.pop-card-img-mobile {
+    display: none;
 }
 
 .popular-cost {
@@ -84,29 +90,70 @@
         min-height: unset;
     }
 
-    /* Each card takes up at least the full phone screen height */
+    /* Strip background-image — replaced by real <img> on mobile */
     .popular-card1,
     .popular-card2,
     .popular-card3 {
-        min-height: 100svh;
-        min-height: 100vh;
-        padding-top: 80px; /* Clear the fixed header */
-        background-attachment: scroll; /* Disable parallax-like behaviour on iOS */
-        background-position: center center;
+        background-image: none;
+        background-color: #080c1c;
+        padding-top: 0;
+        min-height: unset;
+    }
+
+    /* Show the mobile image block */
+    .pop-card-img-mobile {
+        display: block;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .pop-card-img-mobile img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 7;
+        object-fit: cover;
+        object-position: center center;
+    }
+
+    /* Per-card: nudge focal point to where the vehicle sits in the image */
+    .popular-card1 .pop-card-img-mobile img { object-position: 60% center; }
+    .popular-card2 .pop-card-img-mobile img { object-position: 55% center; }
+    .popular-card3 .pop-card-img-mobile img { object-position: 65% center; }
+
+    /* Gradient fade: image bleeds into dark card background */
+    .pop-card-img-mobile::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            transparent 40%,
+            #080c1c 100%
+        );
+        pointer-events: none;
+    }
+
+    /* Content zone sits below the image on a dark background */
+    .popular-card1 .container,
+    .popular-card2 .container,
+    .popular-card3 .container {
+        padding-top: 16px;
+        padding-bottom: 40px;
     }
 
     .popular-cost {
-        padding-top: 24px;
+        padding-top: 16px;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
     }
 
     .pop-why {
-        padding-top: 32px;
+        padding-top: 24px;
     }
 
     .pop-nuv {
-        padding-top: 16px;
+        padding-top: 12px;
         gap: 10px;
     }
 
@@ -114,7 +161,7 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        margin-top: 32px;
+        margin-top: 28px;
         gap: 12px;
     }
 

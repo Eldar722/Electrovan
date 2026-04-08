@@ -10,14 +10,8 @@
 
 .directions-title {
     color: rgb(var(--white-bg-rgb));
-    width: max-content;
-    display: flex;
-    flex-direction: column;
-}
-
-.subdirections-title {
-    display: flex;
-    justify-content: end;
+    width: 100%;
+    text-align: center;
 }
 
 .directions-cards {

@@ -1,10 +1,22 @@
 import tengeIcon from '../assets/images/icons/tenge.svg';
+import geelyImg from '../assets/images/cars/GEELY.png';
+import renaultImg from '../assets/images/cars/Renault.png';
+import kiaImg from '../assets/images/cars/Kia.png';
+
+const carImages = {
+    1: geelyImg,
+    2: renaultImg,
+    3: kiaImg,
+};
 
 function PopularCard({ popularcar = [], onOpenModal }) {
     return (
         <section className='popular-cards'>
             {popularcar.map((car) => (
                 <div key={car.id} className={`popular-card${car.id}`}>
+                    <div className='pop-card-img-mobile'>
+                        <img src={carImages[car.id]} alt={car.name} />
+                    </div>
                     <div className='container'>
                         <div className='text-display-xl'>
                             {car.name}

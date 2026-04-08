@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import crossIcon from '../../assets/images/icons/cross-icon.svg';
 import tengeIcon from '../../assets/images/icons/tengeDark-icon.svg';
 
 function CatalogModal({ car, onClose, onOpenCtaModal }) {
     const [isClosing, setIsClosing] = useState(false);
+    const modalRef = useRef(null);
 
     const handleClose = () => {
         setIsClosing(true);
-        setTimeout(onClose, 300);
     };
 
     // Lock background scroll while modal is open
@@ -20,12 +20,28 @@ function CatalogModal({ car, onClose, onOpenCtaModal }) {
         };
     }, []);
 
+    // Close modal when exit animation ends
+    useEffect(() => {
+        const el = modalRef.current;
+        if (!el) return;
+
+        const onAnimEnd = () => {
+            if (isClosing) onClose();
+        };
+        el.addEventListener('animationend', onAnimEnd);
+        return () => el.removeEventListener('animationend', onAnimEnd);
+    }, [isClosing, onClose]);
+
     return (
         <section
+            ref={modalRef}
             className={`modal-section${isClosing ? ' modal-section--closing' : ''}`}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Карточка ${car.brand} ${car.model}`}
             onClick={handleClose}
         >
-            <button className='modal-close' onClick={handleClose}>
+            <button className='modal-close' onClick={handleClose} aria-label="Закрыть">
                 <img src={crossIcon} alt='cross-icon' />
             </button>
             <div className="modalcat-back" onClick={(e) => e.stopPropagation()}>

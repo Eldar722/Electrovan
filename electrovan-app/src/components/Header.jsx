@@ -12,13 +12,22 @@ function Header({ onOpenModal }) {
     const [scrolled, setScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-    
+
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 80);
-        const handleResize = () => setIsMobile(window.innerWidth <= 768);
 
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleResize);
+        const debounce = (fn, delay) => {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => fn(...args), delay);
+            };
+        };
+
+        const handleResize = debounce(() => setIsMobile(window.innerWidth <= 768), 150);
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleResize, { passive: true });
         
         return () => { 
             window.removeEventListener('scroll', handleScroll);
@@ -27,9 +36,9 @@ function Header({ onOpenModal }) {
     }, []);
 
     return (
-        <header className={`header${scrolled ? ' header--scrolled' : ''}`}>
+        <header className={`header${scrolled ? ' header--scrolled' : ''}`} role="banner">
             <span className={`logo text-heading-xl ${isMobileMenuOpen ? 'logo--menu-open' : ''}`}>ElectroVan</span>
-            <nav className={`nav ${isMobileMenuOpen ? 'nav--open' : ''}`}>
+            <nav id="main-nav" className={`nav ${isMobileMenuOpen ? 'nav--open' : ''}`} aria-label="Основная навигация">
                 {navLinks.map((link) => (
                     <a
                         key={link.desktop}
@@ -43,9 +52,12 @@ function Header({ onOpenModal }) {
                 <button className="cta-btn text-body-lg cta-btn--mobile" onClick={onOpenModal}>Оставить заявку</button>
             </nav>
             <button className="cta-btn text-body-lg cta-btn--desktop" onClick={onOpenModal}>Оставить заявку</button>
-            
-            <button 
-                className={`menu-btn ${isMobileMenuOpen ? 'menu-btn--open' : ''}`} 
+
+            <button
+                className={`menu-btn ${isMobileMenuOpen ? 'menu-btn--open' : ''}`}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="main-nav"
+                aria-label={isMobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
                 <span></span>

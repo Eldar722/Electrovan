@@ -27,9 +27,7 @@ function Catalog({ onOpenModal }) {
         lineRef.current.style.width = buttonRect.width + 'px';
     };
 
-    // Set initial line position and update when activeCategory changes
     useEffect(() => {
-        // Use a small timeout to ensure DOM is fully rendered before measuring
         const timer = setTimeout(() => {
             if (wrapperRef.current) {
                 const activeButton = wrapperRef.current.querySelector(`button[data-category="${activeCategory}"]`);
@@ -61,8 +59,10 @@ function Catalog({ onOpenModal }) {
                         Интересен какой то определенный <span className="cat-brand">бренд?</span>
                     </div>
                 </div>
-                <Brands />
-                <div className='full-catalog' ref={catalogRef}>
+            </div>
+            <Brands />
+            <div className="container">
+            <div className='full-catalog' ref={catalogRef}>
                     <div className='text-display-xl'>Наш полный каталог</div>
                     <div className='catalog-help text-heading-lg'>
                         Не знаете как выбрать правильно?

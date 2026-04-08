@@ -68,7 +68,7 @@
 }
 
 .nav a:hover {
-    color: rgb(var(--blue-100-rgb));
+    color: rgb(var(--blue-300-rgb));
 }
 
 .nav a:hover::after {
@@ -101,7 +101,7 @@
     display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .header {
         width: calc(100% - 32px);
         padding: 16px 20px;
@@ -119,19 +119,20 @@
     }
 
     .nav {
-        position: absolute;
-        top: -8px;
-        right: -16px;
-        width: calc(100% + 32px);
+        position: fixed;
+        top: 80px;
+        left: 16px;
+        right: 16px;
+        width: auto;
         background-color: rgb(var(--blue-400-rgb));
         border: 2px solid rgba(var(--blue-100-rgb), 0.4);
         border-radius: 30px;
         flex-direction: column;
         align-items: center;
-        padding: 80px 24px 30px 24px;
+        padding: 32px 24px 30px 24px;
         gap: 16px;
         box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        z-index: 90;
+        z-index: 999;
 
         display: flex;
         visibility: hidden;

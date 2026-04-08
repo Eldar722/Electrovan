@@ -17,10 +17,8 @@
 .brand-nuv {
     margin-top: 40px;
     height: 230px;
-    width: 99vw;
+    width: 100%;
     padding: 25px 0px 25px 0px;
-    margin-left: 50%;
-    transform: translateX(-50%);
     border-top: 5px solid;
     border-bottom: 5px solid;
     border-color: rgb(var(--blue-100-rgb));
@@ -140,6 +138,8 @@
     border-radius: 10px;
     border-color: rgb(var(--blue-200-rgb));
     padding: 5px 15px;
+    min-height: 44px;
+    cursor: pointer;
     transition: 0.3s ease-in-out;
 }
 
@@ -293,14 +293,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between; /* Push price left, button right */
+    justify-content: space-between;
     gap: 6px;
+    min-width: 0;
 }
 
 .card-cost {
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .card-cost img {
@@ -316,7 +319,14 @@
     border: 1px solid;
     border-color: rgb(var(--blue-200-rgb));
     border-radius: 8px;
-    padding: 3px 2px;
+    padding: 6px 10px;
+    min-height: 36px;
+    max-width: 55%;
+    white-space: normal;
+    word-break: break-word;
+    flex-shrink: 1;
+    line-height: 1.2;
+    font-size: 11px;
 
     transition: 0.2s ease-in-out;
 }
@@ -390,9 +400,28 @@
         gap: 16px;
     }
 
+    .carousel-wrapper {
+        justify-content: center;
+        gap: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+
     .scroll-carousel {
+        display: flex;
+        flex-direction: row;
         gap: 16px;
-        padding: 0 16px;
+        padding: 0 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        touch-action: pan-x;
+    }
+
+    .scroll-carousel::-webkit-scrollbar {
+        display: none;
     }
 
     .brand-button {
@@ -461,51 +490,50 @@
     }
 
     .card-params {
-        gap: 2px;
+        gap: 6px;
         flex-wrap: nowrap;
         justify-content: space-around;
     }
 
     .card-params img {
-        height: 18px;
-        width: 18px;
+        height: 22px;
+        width: 22px;
     }
 
     .one-param {
-        font-size: 9px;
+        font-size: 11px;
         min-width: 0;
     }
 
     .card-price {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        align-items: center;
         gap: 6px;
         padding: 0 4px 4px;
     }
 
     .card-cost {
-        font-size: 10px;
+        font-size: 11px;
     }
 
     .card-button {
-        width: 100%;
-        padding: 5px 4px;
+        flex-shrink: 1;
+        min-width: 0;
+        padding: 6px 8px;
+        min-height: 32px;
         text-align: center;
         font-size: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 52%;
     }
 
     .paginator {
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding: 8px 24px 12px;
-        margin-left: -24px;
-        margin-right: -24px;
+        justify-content: center;
+        padding: 8px 0 12px;
         gap: 6px;
-        scrollbar-width: none;
-    }
-
-    .paginator::-webkit-scrollbar {
-        display: none;
+        flex-wrap: wrap;
     }
 
     .paginator button {

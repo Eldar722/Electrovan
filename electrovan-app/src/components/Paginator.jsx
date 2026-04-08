@@ -17,29 +17,33 @@ function Paginator({ totalPages, currentPage, setCurrentPage }) {
     const pages = getPages();
 
     return (
-        <section className="paginator text-body-lg">
-            <button className="left-button" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} >
-                <img src={leftIcon} alt='left-icon' />
+        <nav className="paginator text-body-lg" aria-label="Навигация по страницам">
+            <button className="left-button" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} aria-label="Предыдущая страница">
+                <img src={leftIcon} alt='' aria-hidden="true" />
             </button>
 
             {pages.map((page, index) => {
                 const prevPage = pages[index - 1];
 
                 return (
-                    <span key={page} >
-                        {prevPage && page - prevPage > 1 && <span className='dots'>...</span>}
-                        <button onClick={() => setCurrentPage(page)} className={currentPage === page ? "active" : ""}>
+                    <span key={page}>
+                        {prevPage && page - prevPage > 1 && <span className='dots' aria-hidden="true">...</span>}
+                        <button
+                            onClick={() => setCurrentPage(page)}
+                            className={currentPage === page ? "active" : ""}
+                            aria-current={currentPage === page ? "page" : undefined}
+                        >
                             {page}
                         </button>
                     </span>
                 );
             })}
 
-            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>
-                <img src={rightIcon} alt='right-icon' />
+            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} aria-label="Следующая страница">
+                <img src={rightIcon} alt='' aria-hidden="true" />
             </button>
 
-        </section>
+        </nav>
     )
 }
 

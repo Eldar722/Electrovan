@@ -18,7 +18,10 @@ function App() {
     const [isToastClosing, setIsToastClosing] = useState(false);
     const [showToast, setShowToast] = useState(false);
 
-    const handleFormSubmit = () => {
+    const handleFormSubmit = (formData) => {
+        // formData: { name, phone } — можно отправить на сервер
+        console.log('Form submitted:', formData);
+
         setShowToast(true);
         setIsToastClosing(false);
 

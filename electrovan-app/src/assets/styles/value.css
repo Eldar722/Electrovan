@@ -65,12 +65,9 @@
         scroll-snap-type: x mandatory;
         gap: 16px;
         padding-bottom: 24px;
-
-        margin-left: -24px;
-        margin-right: -24px;
         padding-left: 24px;
         padding-right: 24px;
-        
+
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
     }
@@ -81,8 +78,8 @@
 
     .value-card {
         flex: 0 0 auto;
-        width: 280px; 
-        min-width: 280px;
+        width: min(280px, calc(100vw - 64px));
+        min-width: 240px;
         height: auto;
         align-self: stretch;
 

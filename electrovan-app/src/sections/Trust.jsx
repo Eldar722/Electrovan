@@ -48,7 +48,7 @@ function Trust() {
     }, []);
 
     return (
-        <section className="page-blue" ref={sectionRef} id="guarantee">
+        <section className="trust-section page-blue" ref={sectionRef} id="guarantee">
             <div className="container">
                 <div className="section-heading">
                     <h2 className="section-title text-heading-xl text-white-base">Гарантия и сервисное сопровождение</h2>
