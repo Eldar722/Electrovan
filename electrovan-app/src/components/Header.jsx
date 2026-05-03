@@ -5,7 +5,7 @@ const navLinks = [
         { desktop: 'Каталог', mobile: 'Перейти в каталог', href: "#catalog"},
         { desktop: 'Помощь', mobile: 'Помощь в выборе', href: "#help"},
         { desktop: 'Гарантии', mobile: 'Условия гарантии', href: "#guarantee"},
-        { desktop: 'Контакты', mobile: 'Наши контакты', href: "#contacts"},
+        { desktop: 'Контакты', mobile: 'Наши контакты', href: "#footer"},
 ];
 
 function Header({ onOpenModal }) {

@@ -42,7 +42,7 @@ function DirCard() {
     return (
         <div className='directions-cards' ref={cardsContainerRef}>
             <div className='direct-card'>
-                <img src={cityIcon} alt='city' />
+                <img src={cityIcon} alt='' aria-hidden="true" />
                 <div className='dircard-text text-heading-lg'>
                     Ремонт и строительство
                     <div className='text-caption'>
@@ -51,7 +51,7 @@ function DirCard() {
                 </div>
             </div>
             <div className='direct-card'>
-                <img src={trackIcon} alt='city' />
+                <img src={trackIcon} alt='' aria-hidden="true" />
                 <div className='dircard-text text-heading-lg'>
                     Логистика и доставка
                     <div className='text-caption'>
@@ -60,7 +60,7 @@ function DirCard() {
                 </div>
             </div>
             <div className='direct-card'>
-                <img src={tourismIcon} alt='city' />
+                <img src={tourismIcon} alt='' aria-hidden="true" />
                 <div className='dircard-text text-heading-lg'>
                     Туризм и трансферы
                     <div className='text-caption'>
@@ -69,7 +69,7 @@ function DirCard() {
                 </div>
             </div>
             <div className='direct-card'>
-                <img src={rentIcon} alt='city' />
+                <img src={rentIcon} alt='' aria-hidden="true" />
                 <div className='dircard-text text-heading-lg'>
                     Аренда и шеринг
                     <div className='text-caption'>

@@ -1,0 +1,84 @@
+/* ==== Contacts Section ==== */
+
+.contacts-section {
+    padding-bottom: 48px;
+}
+
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.contacts-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 24px 28px;
+    border: 1.5px solid rgba(var(--blue-100-rgb), 0.4);
+    border-radius: 20px;
+    background-color: rgb(var(--white-bg-rgb));
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
+.contacts-card:hover {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    border-color: rgb(var(--blue-200-rgb));
+}
+
+.contacts-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contacts-card-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.contacts-card-label {
+    line-height: 1.2;
+}
+
+.contacts-card-value {
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .contacts-section {
+        padding-bottom: 32px;
+    }
+
+    .contacts-grid {
+        gap: 12px;
+    }
+
+    .contacts-card {
+        padding: 22px 14px 20px;
+        gap: 8px;
+    }
+
+    .contacts-card-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .contacts-card-icon img {
+        width: 30px;
+        height: 30px;
+    }
+}

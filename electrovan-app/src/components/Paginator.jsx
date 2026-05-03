@@ -2,6 +2,8 @@ import leftIcon from '../assets/images/icons/left-icon.svg';
 import rightIcon from '../assets/images/icons/right-icon.svg';
 
 function Paginator({ totalPages, currentPage, setCurrentPage }) {
+    if (!totalPages || totalPages < 2) return null;
+
     const getPages = () => {
         const pages = [];
 

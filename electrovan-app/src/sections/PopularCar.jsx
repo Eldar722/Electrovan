@@ -1,7 +1,13 @@
 import PopularCard from '../components/PopularCard';
-import { popularcar } from '../data/popularcar';
+import { useCatalogStore } from '../store/useCatalogStore';
 
 function PopularCar({ onOpenModal }) {
+    const cars    = useCatalogStore((s) => s.cars);
+    const loading = useCatalogStore((s) => s.loading);
+    const popularCars = cars.filter((car) => car.isPopular);
+
+    if (loading || popularCars.length === 0) return null;
+
     return (
         <section className='catalog-section'>
             <div className='container'>
@@ -11,7 +17,7 @@ function PopularCar({ onOpenModal }) {
                     </div>
                 </div>
             </div>
-            <PopularCard popularcar={popularcar} onOpenModal={onOpenModal}/>
+            <PopularCard popularcar={popularCars} onOpenModal={onOpenModal}/>
         </section>
     );
 }

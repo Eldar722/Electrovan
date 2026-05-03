@@ -17,6 +17,7 @@
     background-repeat: no-repeat;
     padding-top: 20px;
     color: rgb(var(--white-bg-rgb));
+    min-height: 100vh;
 }
 
 .popular-card1 {
@@ -91,13 +92,21 @@
     }
 
     /* Strip background-image — replaced by real <img> on mobile */
+    /* !important overrides inline style set by React */
     .popular-card1,
     .popular-card2,
     .popular-card3 {
-        background-image: none;
+        background-image: none !important;
         background-color: #080c1c;
         padding-top: 0;
-        min-height: unset;
+        min-height: 460px;
+    }
+
+    /* Reserve space for 2 lines of the title so all cards stay equal height */
+    .popular-card1 .text-display-xl,
+    .popular-card2 .text-display-xl,
+    .popular-card3 .text-display-xl {
+        min-height: 2.5em;
     }
 
     /* Show the mobile image block */

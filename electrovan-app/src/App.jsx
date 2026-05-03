@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { submitLead, fetchSettings, supabase } from './api/supabase';
+import { useCatalogStore } from './store/useCatalogStore';
 import './assets/styles/global.css'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
@@ -17,53 +19,84 @@ function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isToastClosing, setIsToastClosing] = useState(false);
     const [showToast, setShowToast] = useState(false);
+    const [siteSettings, setSiteSettings] = useState(null);
+    const loadCars = useCatalogStore((s) => s.loadCars);
+    const subscribeToCarChanges = useCatalogStore((s) => s.subscribeToCarChanges);
 
-    const handleFormSubmit = (formData) => {
-        // formData: { name, phone } — можно отправить на сервер
-        console.log('Form submitted:', formData);
+    useEffect(() => {
+        loadCars();
+        const unsubscribeCars = subscribeToCarChanges();
+
+        const loadSettings = () => {
+            fetchSettings().then(data => { if (data) setSiteSettings(data); }).catch(() => {});
+        };
+        loadSettings();
+
+        // Realtime fires a fresh fetch instead of using payload.new directly —
+        // safe even if table lacks REPLICA IDENTITY FULL (partial rows).
+        const settingsChannel = supabase
+            .channel('site-settings-landing')
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'site_settings' }, loadSettings)
+            .subscribe();
+
+        return () => {
+            unsubscribeCars();
+            supabase.removeChannel(settingsChannel);
+        };
+    }, [loadCars, subscribeToCarChanges]);
+
+    const openModal  = useCallback(() => setIsModalOpen(true),  []);
+    const closeModal = useCallback(() => setIsModalOpen(false), []);
+
+    const handleFormSubmit = useCallback(async ({ name, phone }) => {
+        await submitLead(name, phone); // throws on error — CTAmodal handles it
 
         setShowToast(true);
         setIsToastClosing(false);
 
-        // Start closing animation after 3.7s
         setTimeout(() => {
             setIsToastClosing(true);
-            // Completely remove from DOM after animation (300ms)
             setTimeout(() => {
                 setShowToast(false);
                 setIsToastClosing(false);
             }, 300);
         }, 3700);
-    };
+    }, []);
 
     return (
         <>
+            {/* Screen reader announcement — always in DOM so aria-live fires on text change */}
+            <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+                {showToast ? 'Заявка отправлена! Мы свяжемся с вами в ближайшее время.' : ''}
+            </div>
+
+            {/* Visual toast — mounts/unmounts to keep CSS animation working */}
             {showToast && (
-                <div className={`toast ${isToastClosing ? 'toast--closing' : ''}`}>
+                <div className={`toast${isToastClosing ? ' toast--closing' : ''}`}>
                     Заявка отправлена! Мы свяжемся с вами в ближайшее время.
                 </div>
             )}
 
             {isModalOpen && (
                 <CTAmodal
-                    onClose={() => setIsModalOpen(false)}
+                    onClose={closeModal}
                     onSubmit={handleFormSubmit}
                 />
             )}
 
             <div className="hero-wrapper">
-                <Header onOpenModal={() => setIsModalOpen(true)} />
-                <HeroSection onOpenModal={() => setIsModalOpen(true)} />
+                <Header onOpenModal={openModal} />
+                <HeroSection onOpenModal={openModal} />
             </div>
             <ValueSection />
             <DirectionsSection id="directions" />
-            <PopularCarSection onOpenModal={() => setIsModalOpen(true)}/>
-            <CatalogSection id="catalog" onOpenModal={() => setIsModalOpen(true)} />
+            <PopularCarSection onOpenModal={openModal} />
+            <CatalogSection id="catalog" onOpenModal={openModal} />
             <BenefitsSection />
             <HelpPageSection id="help" />
             <TrustSection id="guarantee" />
-            <CTASection onOpenModal={() => setIsModalOpen(true)} />
-            <Footer id="contacts" onOpenModal={() => setIsModalOpen(true)}/>
+            <CTASection onOpenModal={openModal} />
+            <Footer onOpenModal={openModal} settings={siteSettings} />
         </>
     );
 }

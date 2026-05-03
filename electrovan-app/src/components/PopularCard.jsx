@@ -1,31 +1,29 @@
 import tengeIcon from '../assets/images/icons/tenge.svg';
-import geelyImg from '../assets/images/cars/GEELY.png';
-import renaultImg from '../assets/images/cars/Renault.png';
-import kiaImg from '../assets/images/cars/Kia.png';
-
-const carImages = {
-    1: geelyImg,
-    2: renaultImg,
-    3: kiaImg,
-};
 
 function PopularCard({ popularcar = [], onOpenModal }) {
     return (
         <section className='popular-cards'>
-            {popularcar.map((car) => (
-                <div key={car.id} className={`popular-card${car.id}`}>
+            {popularcar.map((car, index) => (
+                <div
+                    key={car.id}
+                    className={`popular-card${index + 1}`}
+                    style={car.popularBg ? { backgroundImage: `url(${car.popularBg})` } : undefined}
+                >
                     <div className='pop-card-img-mobile'>
-                        <img src={carImages[car.id]} alt={car.name} />
+                        {car.popularBg
+                            ? <img src={car.popularBg} alt={`${car.brand} ${car.model}`} loading="lazy" onError={(e) => e.currentTarget.classList.add('img-fallback')} />
+                            : <div className='img-placeholder' style={{ width: '100%', aspectRatio: '16/7' }} />
+                        }
                     </div>
                     <div className='container'>
                         <div className='text-display-xl'>
-                            {car.name}
+                            {car.brand} {car.model}
                         </div>
                         <div className='popular-cost'>
                             <div className='text-heading-lg'>
-                                Цена стартует от {car.price.toLocaleString('ru-RU')}
+                                Цена стартует от {(Number(car.fullPrice ?? car.full_price) || 0).toLocaleString('ru-RU')}
                             </div>
-                            <img src={tengeIcon} alt='tenge-icon' />
+                            <img src={tengeIcon} alt='' aria-hidden="true" />
                         </div>
                         <div className='pop-why'>
                             <div className='text-heading-lg'>
@@ -34,9 +32,10 @@ function PopularCard({ popularcar = [], onOpenModal }) {
                         </div>
                         <div className='text-heading-lg'>
                             <div className='pop-nuv'>
-                                {car.specs.map((spec, index) => (
-                                    <span key={index}>{spec}</span>
-                                ))}
+                                {car.seats != null && <span>до {car.seats} посадочных мест</span>}
+                                {car.battery != null && <span>{car.battery} кВт·ч батарея</span>}
+                                {car.range != null && <span>Запас хода — до {car.range} км</span>}
+                                {car.volume != null && <span>Кузов {car.volume} м³</span>}
                             </div>
                         </div>
                         <div className='button-block text-body-md'>

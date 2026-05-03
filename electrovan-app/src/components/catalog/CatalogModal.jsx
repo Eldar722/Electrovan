@@ -6,30 +6,68 @@ import tengeIcon from '../../assets/images/icons/tengeDark-icon.svg';
 function CatalogModal({ car, onClose, onOpenCtaModal }) {
     const [isClosing, setIsClosing] = useState(false);
     const modalRef = useRef(null);
+    const triggerRef = useRef(null);
 
     const handleClose = () => {
         setIsClosing(true);
     };
 
-    // Lock background scroll while modal is open
+    // Lock background scroll while modal is open; save trigger for focus restore
     useEffect(() => {
         const prev = document.body.style.overflow;
+        triggerRef.current = document.activeElement;
         document.body.style.overflow = 'hidden';
         return () => {
             document.body.style.overflow = prev;
+            triggerRef.current?.focus();
         };
     }, []);
 
-    // Close modal when exit animation ends
+    // Close on Escape key
+    useEffect(() => {
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') setIsClosing(true);
+        };
+        document.addEventListener('keydown', onKeyDown);
+        return () => document.removeEventListener('keydown', onKeyDown);
+    }, []);
+
+    // Focus trap: keep Tab/Shift+Tab inside the modal
     useEffect(() => {
         const el = modalRef.current;
         if (!el) return;
-
-        const onAnimEnd = () => {
-            if (isClosing) onClose();
+        const handleTab = (e) => {
+            if (e.key !== 'Tab') return;
+            const focusable = el.querySelectorAll(
+                'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            );
+            if (focusable.length === 0) return;
+            const first = focusable[0];
+            const last  = focusable[focusable.length - 1];
+            if (e.shiftKey) {
+                if (document.activeElement === first) { e.preventDefault(); last?.focus(); }
+            } else {
+                if (document.activeElement === last)  { e.preventDefault(); first?.focus(); }
+            }
         };
-        el.addEventListener('animationend', onAnimEnd);
-        return () => el.removeEventListener('animationend', onAnimEnd);
+        document.addEventListener('keydown', handleTab);
+        return () => document.removeEventListener('keydown', handleTab);
+    }, []);
+
+    // Close after exit animation; fallback fires if animation doesn't trigger
+    useEffect(() => {
+        if (!isClosing) return;
+        const el = modalRef.current;
+        const fallback = setTimeout(onClose, 400);
+        const onAnimEnd = () => {
+            clearTimeout(fallback);
+            onClose();
+        };
+        el?.addEventListener('animationend', onAnimEnd);
+        return () => {
+            el?.removeEventListener('animationend', onAnimEnd);
+            clearTimeout(fallback);
+        };
     }, [isClosing, onClose]);
 
     return (
@@ -42,10 +80,13 @@ function CatalogModal({ car, onClose, onOpenCtaModal }) {
             onClick={handleClose}
         >
             <button className='modal-close' onClick={handleClose} aria-label="Закрыть">
-                <img src={crossIcon} alt='cross-icon' />
+                <img src={crossIcon} alt='' aria-hidden="true" />
             </button>
             <div className="modalcat-back" onClick={(e) => e.stopPropagation()}>
-                <img src={car.modalImage} alt={`${car.brand} ${car.model}`} />
+                {car.modalImage
+                    ? <img src={car.modalImage} alt={`${car.brand} ${car.model}`} onError={(e) => e.currentTarget.classList.add('img-fallback')} />
+                    : <div className='modal-img-placeholder' />
+                }
                 <div className='modal-info'>
                     <div className='modal-title text-heading-xl'>
                         {car.brand} {car.model}
@@ -64,27 +105,31 @@ function CatalogModal({ car, onClose, onOpenCtaModal }) {
                     <div className='specs'>
                         <div className='specs-row'>
                             <span className='label'>Грузоподъемность</span>
-                            <span className='value'>{car.weight}</span>
+                            <span className='value'>{car.capacity != null ? `${car.capacity} кг` : '—'}</span>
+                        </div>
+                        <div className='specs-row'>
+                            <span className='label'>Вес автомобиля</span>
+                            <span className='value'>{car.weight != null ? `${car.weight} т` : '—'}</span>
                         </div>
                         <div className='specs-row'>
                             <span className='label'>Габариты (ДхШхВ)</span>
-                            <span className='value'>{car.dimensions}</span>
+                            <span className='value'>{car.dimensions || '—'}</span>
                         </div>
                         <div className='specs-row'>
                             <span className='label'>Объем кузова</span>
-                            <span className='value'>{car.volume}</span>
+                            <span className='value'>{car.volume != null ? `${car.volume} м³` : '—'}</span>
                         </div>
                         <div className='specs-row'>
                             <span className='label'>Емкость батареи</span>
-                            <span className='value'>{car.battery}</span>
+                            <span className='value'>{car.battery != null ? `${car.battery} кВт·ч` : '—'}</span>
                         </div>
                         <div className='specs-row'>
                             <span className='label'>Запас хода</span>
-                            <span className='value'>{car.range}</span>
+                            <span className='value'>{car.range != null ? `${car.range} км` : '—'}</span>
                         </div>
                         <div className='specs-row'>
                             <span className='label'>Количество мест</span>
-                            <span className='value'>{car.seats}</span>
+                            <span className='value'>{car.seats != null ? car.seats : '—'}</span>
                         </div>
                         <div className='specs-row'>
                             <span className='label'>Наличие гарантии</span>
@@ -93,14 +138,16 @@ function CatalogModal({ car, onClose, onOpenCtaModal }) {
                     </div>
                     <div className='modal-specs-line'></div>
                     <div className='modal-end'>
-                        <button className='guarantees-button text-caption'>
-                            Условия гарантии
-                        </button>
+                        {car.warranty && (
+                            <button className='guarantees-button text-caption'>
+                                Условия гарантии
+                            </button>
+                        )}
                         <div className='model-line'></div>
                         <div className='modal-price'>
                             <div className='modal-cost text-body-md'>
-                                Стоимость: ~{car.fullPrice}
-                                <img src={tengeIcon} alt='tenge-icon' />
+                                Стоимость: ~{car.fullPrice != null ? Number(car.fullPrice).toLocaleString('ru-RU') : '—'}
+                                <img src={tengeIcon} alt='' aria-hidden="true" />
                             </div>
                             <button
                                 className='order-button'
@@ -125,11 +172,11 @@ CatalogModal.propTypes = {
         model: PropTypes.string,
         description: PropTypes.string,
         usedIn: PropTypes.arrayOf(PropTypes.string),
-        weight: PropTypes.string,
+        weight: PropTypes.number,
         dimensions: PropTypes.string,
-        volume: PropTypes.string,
-        battery: PropTypes.string,
-        range: PropTypes.string,
+        volume: PropTypes.number,
+        battery: PropTypes.number,
+        range: PropTypes.number,
         seats: PropTypes.number,
         warranty: PropTypes.bool,
         fullPrice: PropTypes.string,
